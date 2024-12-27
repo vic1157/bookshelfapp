@@ -3,6 +3,7 @@ import './App.css'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import { useEffect } from 'react'
+import BookList from './components/BookList'
 
 function App() {
 	const [books, setBooks] = useState([]);
@@ -30,6 +31,7 @@ function App() {
 	return (
 		<>
 			<NavBar onSearch={handleSearch} />
+			<BookList books={books} />
 			<Footer />
 		</>
   	)
