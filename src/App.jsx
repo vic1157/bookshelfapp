@@ -1,28 +1,30 @@
-import { useState } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import './App.css'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
-import { useEffect } from 'react'
+import {  } from 'react'
 import BookList from './components/BookList'
 
 function App() {
 	const [books, setBooks] = useState([]);
-	const [searchTerm, setSearchTerm] = useState('Python');
+	const [searchTerm, setSearchTerm] = useState('Java');
 
-	useEffect(() => {
-		console.log('BOOKS::', books);
-	}, [books])
 
-	useEffect(() => {
-		fetchBooks();
-	}, [searchTerm]);
-	
-	const fetchBooks = async () => {
+	const fetchBooks = useCallback(async () => {
 		const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`);
 		const data = await res.json();
 		setBooks(data.items || []);
-	}
+	}, [searchTerm])
 
+	useEffect(() => {
+		console.log('BOOKS::', books)
+	}, [books]);
+
+	useEffect(() => {
+		fetchBooks();
+	}, [fetchBooks]);
+	
+	
 	function handleSearch(query) {
 		setSearchTerm(query);
 		console.log('Updated Term:', searchTerm)
