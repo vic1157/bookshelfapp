@@ -27,6 +27,7 @@ BookCard.propTypes = {
 	book: PropTypes.shape({
 	  volumeInfo: PropTypes.shape({
 		imageLinks: PropTypes.shape({
+		  smallThumbnail: PropTypes.string,
 		  thumbnail: PropTypes.string  // URL for the book thumbnail
 		}),
 		title: PropTypes.string.isRequired,  // Book title is required

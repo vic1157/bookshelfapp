@@ -1,4 +1,5 @@
 import { useState } from "react";
+import PropTypes from 'prop-types';
 
 // Come back and figure this out
 function SearchBar({onSearch}) {
@@ -21,5 +22,11 @@ function SearchBar({onSearch}) {
 	)
 
 }
+
+// PropTypes validation
+SearchBar.propTypes = {
+	// onSearch should be a function and is required
+	onSearch: PropTypes.func.isRequired,
+};
 
 export default SearchBar;

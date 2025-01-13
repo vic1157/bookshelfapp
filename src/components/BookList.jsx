@@ -20,9 +20,6 @@ BookList.propTypes = {
 	  PropTypes.shape({
 		id: PropTypes.string.isRequired,
 		// Add other book properties you expect
-		volumeInfo: PropTypes.shape({
-		  title: PropTypes.string.isRequired
-		})
 	  })
 	).isRequired
   };
