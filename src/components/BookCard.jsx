@@ -30,7 +30,7 @@ BookCard.propTypes = {
 		  smallThumbnail: PropTypes.string,
 		  thumbnail: PropTypes.string  // URL for the book thumbnail
 		}),
-		title: PropTypes.string.isRequired,  // Book title is required
+		title: PropTypes.string,
 		authors: PropTypes.arrayOf(PropTypes.string)  // Array of author names
 	  }).isRequired
 	}).isRequired

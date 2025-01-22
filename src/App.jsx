@@ -5,19 +5,26 @@ import Footer from './components/Footer'
 import {  } from 'react'
 import BookList from './components/BookList'
 import GBooklist from './components/GBookList'
+import fetchBooks from './services/api-client'
+
 
 function App() {
 	const [books, setBooks] = useState([]);
 	const [searchTerm, setSearchTerm] = useState('Java');
 	const [loading, setLoading] = useState(false);
 
-
-	const fetchBooks = useCallback(async () => {
-		setLoading(true);
-		const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${searchTerm}`);
-		const data = await res.json();
-		setBooks(data.items || []);
-		setLoading(false);
+	const fetchData = useCallback(async () => {
+		try {
+			setLoading(true);
+			const items = await fetchBooks(searchTerm);
+			setBooks(items);
+		} catch(error) {
+			if (error.name !== 'AbortError') {
+				console.log("Failed to fetch books:", error)
+			}
+		} finally {
+			setLoading(false);
+		}
 	}, [searchTerm])
 
 	useEffect(() => {
@@ -25,8 +32,8 @@ function App() {
 	}, [books]);
 
 	useEffect(() => {
-		fetchBooks();
-	}, [fetchBooks]);
+		fetchData();
+	}, [fetchData]);
 	
 	
 	function handleSearch(query) {
